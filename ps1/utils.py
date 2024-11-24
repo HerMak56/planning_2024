@@ -4,6 +4,7 @@ import numpy as np
 from scipy import signal
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+from matplotlib.animation import FFMpegWriter
 
 
 def normalize_image(img: np.ndarray, threshold: float = 0.1):
@@ -53,6 +54,7 @@ def plotting_results(environment: np.ndarray, rod: np.ndarray, plan: list, save_
 
     ani = animation.ArtistAnimation(fig, imgs, interval=50, blit=True)
 
-    ani.save(save_path)
+    writer = FFMpegWriter(fps=20)
+    ani.save(save_path, writer=writer)
 
     plt.show()
